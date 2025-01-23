@@ -38,7 +38,7 @@ h2 {
 }
 
 .question {
-    display: none;
+    display: none; /* Hide by default */
     margin-bottom: 20px;
     text-align: left;
     padding: 15px;
@@ -47,9 +47,8 @@ h2 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.question.active {
-    display: block;
-}
+/* Remove the .active class handling since we're using direct style manipulation */
+
 
 label {
     display: block;
