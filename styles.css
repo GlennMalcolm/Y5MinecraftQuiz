@@ -48,22 +48,34 @@ h2 {
     height: 300px; /* Fixed height for all question boxes */
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
+    justify-content: space-between; /* Distribute space evenly */
+    align-items: flex-start; /* Align content to the left */
+    overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.question-content {
+    width: 100%; /* Ensure content takes full width */
 }
 
 label {
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
     font-size: 1rem;
     cursor: pointer;
     padding: 8px;
+    text-align: left; /* Align text to the left */
 }
 
-input, select {
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 10px; /* Add spacing between radio/checkbox and text */
+}
+
+input[type="text"],
+input[type="number"] {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1rem;
