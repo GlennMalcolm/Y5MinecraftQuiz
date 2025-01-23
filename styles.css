@@ -45,10 +45,11 @@ h2 {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    min-height: 200px; /* Add a minimum height to ensure consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space evenly */
 }
-
-/* Remove the .active class handling since we're using direct style manipulation */
-
 
 label {
     display: block;
