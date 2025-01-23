@@ -1,89 +1,49 @@
-// Quiz state management
+// At the beginning of script.js
 let currentQuestion = 1;
 const totalQuestions = 25;
-const questionsPerChapter = 5;
 
-// Store student information
-let studentName = '';
-let studentClass = '';
-
-// Function to validate user input when starting the quiz
-function validateUserInput(name, selectedClass) {
-    if (name.trim() === "" || !selectedClass) {
-        alert("Please enter your name and select your class.");
-        return false;
-    }
-    return true;
-}
-
-// Main function to display questions and update UI
-function showQuestion(questionNumber) {
-    // First hide all questions
-    const questions = document.querySelectorAll('.question');
-    questions.forEach(q => {
-        q.style.display = 'none';
-    });
+// Add event listeners when the document loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Add navigation button listeners
+    document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+    document.getElementById('prevBtn').addEventListener('click', previousQuestion);
     
-    // Show the current question
+    // Initialize first question if quiz is active
+    if (!document.getElementById('quiz-page').classList.contains('hidden')) {
+        showQuestion(1);
+    }
+    
+    // Add quiz start button listener
+    document.getElementById('start-quiz-btn').addEventListener('click', startQuiz);
+});
+
+function showQuestion(questionNumber) {
+    console.log('Showing question:', questionNumber); // Debug log
+    
+    // Hide all questions
+    const questions = document.querySelectorAll('.question');
+    questions.forEach(q => q.style.display = 'none');
+    
+    // Show current question
     const currentQuestionElement = document.getElementById(`q${questionNumber}`);
     if (currentQuestionElement) {
         currentQuestionElement.style.display = 'block';
+        console.log('Displayed question:', questionNumber);
+    } else {
+        console.log('Question element not found:', questionNumber);
     }
     
-    // Calculate current chapter
-    const currentChapter = Math.ceil(questionNumber / questionsPerChapter);
-    
-    // Update chapter title
-    updateChapterTitle(currentChapter);
-    
-    // Update progress indicators
-    updateProgress(questionNumber);
-    
-    // Update navigation buttons
-    updateNavigationButtons(questionNumber);
+    // Update progress and buttons
+    updateProgress();
+    updateNavigationButtons();
 }
 
-// Handle chapter titles
-function updateChapterTitle(chapterNumber) {
-    const chapterTitles = {
-        1: "Introduction to Agent Coding",
-        2: "Coding Events and Repeats",
-        3: "Events, Loops, and Conditionals",
-        4: "Nested Loops",
-        5: "Conditionals with Grey Wolves"
-    };
-    
-    const titleElement = document.getElementById('chapter-title');
-    if (titleElement) {
-        titleElement.textContent = `Chapter ${chapterNumber}: ${chapterTitles[chapterNumber]}`;
-    }
-}
-
-// Handle progress bar and text updates
-function updateProgress(questionNumber) {
-    const progressFill = document.querySelector('.progress-fill');
-    const progressText = document.querySelector('.progress-text');
-    
-    const progressPercentage = (questionNumber / totalQuestions) * 100;
-    progressFill.style.width = `${progressPercentage}%`;
-    progressText.textContent = `Question ${questionNumber} of ${totalQuestions}`;
-}
-
-// Update navigation button states
-function updateNavigationButtons(questionNumber) {
-    const prevButton = document.getElementById('prevBtn');
-    const nextButton = document.getElementById('nextBtn');
-    
-    prevButton.disabled = questionNumber === 1;
-    nextButton.textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
-}
-
-// Navigation functions
 function nextQuestion() {
-    console.log('Moving to next question from:', currentQuestion);
+    console.log('Current question before next:', currentQuestion); // Debug log
     
     if (currentQuestion < totalQuestions) {
         currentQuestion++;
+        console.log('Moving to question:', currentQuestion); // Debug log
         showQuestion(currentQuestion);
     } else if (currentQuestion === totalQuestions) {
         if (confirm('Are you ready to submit your quiz?')) {
