@@ -58,10 +58,15 @@ function submitQuiz() {
 }
 
 document.getElementById('start-quiz-btn').addEventListener('click', function () {
+    console.log('Start button clicked'); // Debug log
     const name = document.getElementById('student-name').value;
     const selectedClass = document.getElementById('class-selection').value;
+    
+    console.log('Name:', name); // Debug log
+    console.log('Class:', selectedClass); // Debug log
 
     if (validateUserInput(name, selectedClass)) {
+        console.log('Validation passed'); // Debug log
         document.getElementById('landing-page').classList.add('hidden');
         document.getElementById('quiz-page').classList.remove('hidden');
         currentQuestion = 1;
