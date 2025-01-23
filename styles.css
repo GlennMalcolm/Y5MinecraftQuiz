@@ -45,10 +45,11 @@ h2 {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    min-height: 200px; /* Add a minimum height to ensure consistency */
+    height: 300px; /* Fixed height for all question boxes */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribute space evenly */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
 }
 
 label {
