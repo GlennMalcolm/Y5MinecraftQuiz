@@ -17,10 +17,15 @@ const chapterTitles = {
 
 // Initialize everything when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded and parsed');
+
     // Set up the start quiz button functionality
     const startButton = document.getElementById('start-quiz-btn');
     if (startButton) {
+        console.log('Start button found');
         startButton.addEventListener('click', handleQuizStart);
+    } else {
+        console.error('Start button not found');
     }
 
     // Set up navigation button event listeners
@@ -31,12 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize first question if quiz is already in progress
     if (!document.getElementById('quiz-page').classList.contains('hidden')) {
+        console.log('Quiz page is visible, initializing first question');
         showQuestion(1);
     }
 });
 
 // Function to handle the start of the quiz
 function handleQuizStart() {
+    console.log('Start quiz button clicked');
+
     const name = document.getElementById('student-name').value;
     const selectedClass = document.getElementById('class-selection').value;
     
@@ -68,10 +76,14 @@ function setupNavigationButtons() {
     
     if (nextButton) {
         nextButton.addEventListener('click', nextQuestion);
+    } else {
+        console.error('Next button not found');
     }
     
     if (prevButton) {
         prevButton.addEventListener('click', previousQuestion);
+    } else {
+        console.error('Previous button not found');
     }
 }
 
@@ -128,6 +140,8 @@ function updateProgress() {
         const progressPercentage = (currentQuestion / totalQuestions) * 100;
         progressFill.style.width = `${progressPercentage}%`;
         progressText.textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+    } else {
+        console.error('Progress elements not found');
     }
 }
 
@@ -138,10 +152,14 @@ function updateChapterDisplay() {
     
     if (chapterTitle) {
         chapterTitle.textContent = `Chapter ${currentChapter}: ${chapterTitles[currentChapter]}`;
+    } else {
+        console.error('Chapter title element not found');
     }
     
     if (chapterIndicator) {
         chapterIndicator.textContent = currentChapter;
+    } else {
+        console.error('Chapter indicator element not found');
     }
 }
 
@@ -152,10 +170,14 @@ function updateNavigationButtons() {
     
     if (prevButton) {
         prevButton.disabled = currentQuestion === 1;
+    } else {
+        console.error('Previous button not found');
     }
     
     if (nextButton) {
         nextButton.textContent = currentQuestion === totalQuestions ? 'Submit Quiz' : 'Next';
+    } else {
+        console.error('Next button not found');
     }
 }
 
