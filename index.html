@@ -30,45 +30,208 @@
 
         <!-- Quiz Page -->
         <div id="quiz-page" class="hidden">
-            <h2>Chapter 1: Introduction to Agent Coding</h2>
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+            <div id="chapter-navigation">
+                <h2 id="chapter-title">Chapter 1: Introduction to Agent Coding</h2>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="progress-text">Question 1 of 25</p>
                 </div>
-                <p class="progress-text">Question 1 of 5</p>
             </div>
-            <div class="question">
-                <h3>1. What is the Agent in Minecraft?</h3>
-                <label><input type="radio" name="q1" value="A"> A. A character that fights mobs</label>
-                <label><input type="radio" name="q1" value="B"> B. A coding assistant in the game</label>
-                <label><input type="radio" name="q1" value="C"> C. A decorative block</label>
-                <label><input type="radio" name="q1" value="D"> D. A type of vehicle</label>
+
+            <!-- Chapter 1: Introduction to Agent Coding -->
+            <div class="chapter" id="chapter1">
+                <div class="question" id="q1">
+                    <h3>1. What is the Agent in Minecraft?</h3>
+                    <label><input type="radio" name="q1" value="A"> A. A character that fights mobs</label>
+                    <label><input type="radio" name="q1" value="B"> B. A coding assistant in the game</label>
+                    <label><input type="radio" name="q1" value="C"> C. A decorative block</label>
+                    <label><input type="radio" name="q1" value="D"> D. A type of vehicle</label>
+                </div>
+
+                <div class="question" id="q2">
+                    <h3>2. Name one tool or feature needed to code the Agent.</h3>
+                    <input type="text" name="q2" placeholder="Your answer here">
+                </div>
+
+                <div class="question" id="q3">
+                    <h3>3. What is the primary coding platform used with Minecraft?</h3>
+                    <label><input type="radio" name="q3" value="A"> A. Python</label>
+                    <label><input type="radio" name="q3" value="B"> B. MakeCode</label>
+                    <label><input type="radio" name="q3" value="C"> C. JavaScript</label>
+                    <label><input type="radio" name="q3" value="D"> D. Scratch</label>
+                </div>
+
+                <div class="question" id="q4">
+                    <h3>4. Which of these actions can the Agent perform?</h3>
+                    <label><input type="checkbox" name="q4" value="Build"> Build structures</label>
+                    <label><input type="checkbox" name="q4" value="Mine"> Mine blocks</label>
+                    <label><input type="checkbox" name="q4" value="Fly"> Fly</label>
+                    <label><input type="checkbox" name="q4" value="Fight"> Fight mobs</label>
+                </div>
+
+                <div class="question" id="q5">
+                    <h3>5. What command moves the Agent forward?</h3>
+                    <input type="text" name="q5" placeholder="Your answer here">
+                </div>
             </div>
-            <div class="question">
-                <h3>2. Name one tool or feature needed to code the Agent.</h3>
-                <input type="text" name="q2" placeholder="Your answer here">
+
+            <!-- Chapter 2: Coding Events and Repeats -->
+            <div class="chapter" id="chapter2">
+                <div class="question" id="q6">
+                    <h3>6. What is an "event" in coding?</h3>
+                    <label><input type="radio" name="q6" value="A"> A. A loop that runs indefinitely</label>
+                    <label><input type="radio" name="q6" value="B"> B. A trigger that starts a specific action</label>
+                    <label><input type="radio" name="q6" value="C"> C. A condition for stopping code</label>
+                    <label><input type="radio" name="q6" value="D"> D. A decorative term in Minecraft</label>
+                </div>
+
+                <div class="question" id="q7">
+                    <h3>7. Write the command for coding the Agent to turn right.</h3>
+                    <input type="text" name="q7" placeholder="Your answer here">
+                </div>
+
+                <div class="question" id="q8">
+                    <h3>8. What is the purpose of repeats in coding?</h3>
+                    <label><input type="radio" name="q8" value="A"> A. To save time by automating actions</label>
+                    <label><input type="radio" name="q8" value="B"> B. To make the Agent move randomly</label>
+                    <label><input type="radio" name="q8" value="C"> C. To check for conditions in loops</label>
+                    <label><input type="radio" name="q8" value="D"> D. To debug errors</label>
+                </div>
+
+                <div class="question" id="q9">
+                    <h3>9. Select all examples of tasks that can use repeats:</h3>
+                    <label><input type="checkbox" name="q9" value="Plant"> Planting trees</label>
+                    <label><input type="checkbox" name="q9" value="Build"> Building walls</label>
+                    <label><input type="checkbox" name="q9" value="Write"> Writing new code for the Agent</label>
+                    <label><input type="checkbox" name="q9" value="Collect"> Collecting items</label>
+                </div>
+
+                <div class="question" id="q10">
+                    <h3>10. What repeat command would you use to save turtles in the game?</h3>
+                    <input type="text" name="q10" placeholder="Your answer here">
+                </div>
             </div>
-            <div class="question">
-                <h3>3. What is the primary coding platform used with Minecraft?</h3>
-                <label><input type="radio" name="q3" value="A"> A. Python</label>
-                <label><input type="radio" name="q3" value="B"> B. MakeCode</label>
-                <label><input type="radio" name="q3" value="C"> C. JavaScript</label>
-                <label><input type="radio" name="q3" value="D"> D. Scratch</label>
+
+            <!-- Chapter 3: Events, Loops, and Conditionals -->
+            <div class="chapter" id="chapter3">
+                <div class="question" id="q11">
+                    <h3>11. What does a "while loop" do in MakeCode?</h3>
+                    <label><input type="radio" name="q11" value="A"> A. Runs code until a condition is met</label>
+                    <label><input type="radio" name="q11" value="B"> B. Runs code a fixed number of times</label>
+                    <label><input type="radio" name="q11" value="C"> C. Executes all blocks simultaneously</label>
+                    <label><input type="radio" name="q11" value="D"> D. Restarts the game</label>
+                </div>
+            
+                <div class="question" id="q12">
+                    <h3>12. Give an example of a condition for a "while loop."</h3>
+                    <input type="text" name="q12" placeholder="Your answer here">
+                </div>
+            
+                <div class="question" id="q13">
+                    <h3>13. What is the function of a conditional statement?</h3>
+                    <label><input type="radio" name="q13" value="A"> A. To make the Agent pause</label>
+                    <label><input type="radio" name="q13" value="B"> B. To allow code to react to certain conditions</label>
+                    <label><input type="radio" name="q13" value="C"> C. To execute code in random order</label>
+                    <label><input type="radio" name="q13" value="D"> D. To end a loop immediately</label>
+                </div>
+            
+                <div class="question" id="q14">
+                    <h3>14. Identify valid conditions for a "while loop:"</h3>
+                    <label><input type="checkbox" name="q14" value="Grass"> While standing on grass</label>
+                    <label><input type="checkbox" name="q14" value="Build"> While building a wall</label>
+                    <label><input type="checkbox" name="q14" value="Pickaxe"> While holding a pickaxe</label>
+                    <label><input type="checkbox" name="q14" value="Water"> While underwater</label>
+                </div>
+            
+                <div class="question" id="q15">
+                    <h3>15. Write an action the Agent can perform in a conditional loop.</h3>
+                    <input type="text" name="q15" placeholder="Your answer here">
+                </div>
             </div>
-            <div class="question">
-                <h3>4. Which of these actions can the Agent perform?</h3>
-                <label><input type="checkbox" name="q4" value="Build"> Build structures</label>
-                <label><input type="checkbox" name="q4" value="Mine"> Mine blocks</label>
-                <label><input type="checkbox" name="q4" value="Fly"> Fly</label>
-                <label><input type="checkbox" name="q4" value="Fight"> Fight mobs</label>
+            
+            <!-- Chapter 4: Nested Loops -->
+            <div class="chapter" id="chapter4">
+                <div class="question" id="q16">
+                    <h3>16. What is a nested loop?</h3>
+                    <label><input type="radio" name="q16" value="A"> A. A loop inside another loop</label>
+                    <label><input type="radio" name="q16" value="B"> B. A loop that stops all running loops</label>
+                    <label><input type="radio" name="q16" value="C"> C. A loop that runs only once</label>
+                    <label><input type="radio" name="q16" value="D"> D. A loop that executes in random order</label>
+                </div>
+            
+                <div class="question" id="q17">
+                    <h3>17. What is a practical use of nested loops?</h3>
+                    <label><input type="radio" name="q17" value="A"> A. Running commands randomly</label>
+                    <label><input type="radio" name="q17" value="B"> B. Making the Agent jump</label>
+                    <label><input type="radio" name="q17" value="C"> C. Building patterns and repeating tasks</label>
+                    <label><input type="radio" name="q17" value="D"> D. Making the Agent move backwards</label>
+                </div>
+            
+                <div class="question" id="q18">
+                    <h3>18. How many times will an inner loop run if the outer loop runs 3 times and the inner loop runs 4 times per cycle?</h3>
+                    <input type="number" name="q18" placeholder="Enter a number">
+                </div>
+            
+                <div class="question" id="q19">
+                    <h3>19. Which of these are valid nested loop uses?</h3>
+                    <label><input type="checkbox" name="q19" value="Walls"> Creating walls in a structure</label>
+                    <label><input type="checkbox" name="q19" value="Tree"> Making a tree grow</label>
+                    <label><input type="checkbox" name="q19" value="Sound"> Repeating a sound effect</label>
+                    <label><input type="checkbox" name="q19" value="Agents"> Automating multiple Agents</label>
+                </div>
+            
+                <div class="question" id="q20">
+                    <h3>20. How do nested loops improve efficiency in coding?</h3>
+                    <input type="text" name="q20" placeholder="Your answer here">
+                </div>
             </div>
-            <div class="question">
-                <h3>5. What command moves the Agent forward?</h3>
-                <input type="text" name="q5" placeholder="Your answer here">
-            </div>
+            
+            <!-- Chapter 5: Conditionals with Grey Wolves -->
+            <div class="chapter" id="chapter5">
+                <div class="question" id="q21">
+                    <h3>21. What is the purpose of conditionals in coding?</h3>
+                    <label><input type="radio" name="q21" value="A"> A. To repeat code multiple times</label>
+                    <label><input type="radio" name="q21" value="B"> B. To make decisions based on conditions</label>
+                    <label><input type="radio" name="q21" value="C"> C. To store values</label>
+                    <label><input type="radio" name="q21" value="D"> D. To execute all commands at once</label>
+                </div>
+            
+                <div class="question" id="q22">
+                    <h3>22. What does the `if` statement do?</h3>
+                    <label><input type="radio" name="q22" value="A"> A. Runs a command forever</label>
+                    <label><input type="radio" name="q22" value="B"> B. Checks a condition and runs code if true</label>
+                    <label><input type="radio" name="q22" value="C"> C. Stops a program</label>
+                    <label><input type="radio" name="q22" value="D"> D. Runs code only once</label>
+                </div>
+            
+                <div class="question" id="q23">
+                    <h3>23. Which of these are valid conditional statements?</h3>
+                    <label><input type="checkbox" name="q23" value="Wall"> If the Agent is near a wall, turn</label>
+                    <label><input type="checkbox" name="q23" value="Water"> If the Agent is underwater, stop</label>
+                    <label><input type="checkbox" name="q23" value="Pig"> If the Agent sees a pig, collect its wool</label>
+                    <label><input type="checkbox" name="q23" value="Move"> If the Agent moves, build</label>
+                </div>
+            
+                <div class="question" id="q24">
+                    <h3>24. How can conditionals help the Agent interact with grey wolves?</h3>
+                    <input type="text" name="q24" placeholder="Your answer here">
+                </div>
+
+    <div class="question" id="q25">
+        <h3>25. Write an example of an `if` statement used in Minecraft coding.</h3>
+        <input type="text" name="q25" placeholder="Your answer here">
+    </div>
+</div>
+
             <div class="navigation-buttons">
                 <button id="prevBtn" class="nav-btn" onclick="previousQuestion()" disabled>Previous</button>
                 <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">Next</button>
+            </div>
+
+            <div class="chapter-indicator">
+                <p>Chapter <span id="current-chapter">1</span> of 5</p>
             </div>
         </div>
     </div>
