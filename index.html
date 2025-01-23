@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Coding Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Landing Page -->
+        <div id="landing-page">
+            <h1>Minecraft Coding Quiz</h1>
+            <label for="student-name">Enter your name:</label>
+            <input type="text" id="student-name" placeholder="Your name">
+            <label for="class-selection">Select your class:</label>
+            <select id="class-selection">
+                <option value="" disabled selected>Select your class</option>
+                <option value="Year 5A">Year 5A</option>
+                <option value="Year 5B">Year 5B</option>
+                <option value="Year 5C">Year 5C</option>
+                <option value="Year 5F">Year 5F</option>
+                <option value="Year 5L">Year 5L</option>
+                <option value="Year 5N">Year 5N</option>
+                <option value="Year 5S">Year 5S</option>
+                <option value="Year 5W">Year 5W</option>
+            </select>
+            <button id="start-quiz-btn" class="btn">Start Quiz</button>
+        </div>
+
+        <!-- Quiz Page -->
+        <div id="quiz-page" class="hidden">
+            <h2>Chapter 1: Introduction to Agent Coding</h2>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <p class="progress-text">Question 1 of 5</p>
+            </div>
+            <div class="question">
+                <h3>1. What is the Agent in Minecraft?</h3>
+                <label><input type="radio" name="q1" value="A"> A. A character that fights mobs</label>
+                <label><input type="radio" name="q1" value="B"> B. A coding assistant in the game</label>
+                <label><input type="radio" name="q1" value="C"> C. A decorative block</label>
+                <label><input type="radio" name="q1" value="D"> D. A type of vehicle</label>
+            </div>
+            <div class="question">
+                <h3>2. Name one tool or feature needed to code the Agent.</h3>
+                <input type="text" name="q2" placeholder="Your answer here">
+            </div>
+            <div class="question">
+                <h3>3. What is the primary coding platform used with Minecraft?</h3>
+                <label><input type="radio" name="q3" value="A"> A. Python</label>
+                <label><input type="radio" name="q3" value="B"> B. MakeCode</label>
+                <label><input type="radio" name="q3" value="C"> C. JavaScript</label>
+                <label><input type="radio" name="q3" value="D"> D. Scratch</label>
+            </div>
+            <div class="question">
+                <h3>4. Which of these actions can the Agent perform?</h3>
+                <label><input type="checkbox" name="q4" value="Build"> Build structures</label>
+                <label><input type="checkbox" name="q4" value="Mine"> Mine blocks</label>
+                <label><input type="checkbox" name="q4" value="Fly"> Fly</label>
+                <label><input type="checkbox" name="q4" value="Fight"> Fight mobs</label>
+            </div>
+            <div class="question">
+                <h3>5. What command moves the Agent forward?</h3>
+                <input type="text" name="q5" placeholder="Your answer here">
+            </div>
+            <div class="navigation-buttons">
+                <button id="prevBtn" class="nav-btn" onclick="previousQuestion()" disabled>Previous</button>
+                <button id="nextBtn" class="nav-btn" onclick="nextQuestion()">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Your firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB6yV6J9QfjAPrAQTbGkRijY_nxC0yx2wI",
+            authDomain: "minecraft-quiz-110d7.firebaseapp.com",
+            databaseURL: "https://minecraft-quiz-110d7-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "minecraft-quiz-110d7",
+            storageBucket: "minecraft-quiz-110d7.firebasestorage.app",
+            messagingSenderId: "221668746154",
+            appId: "1:221668746154:web:71fd8a84168c51c0a481d3"
+        };
+
+        // Initialize Firebase
+        try {
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const auth = getAuth(app);
+            console.log('Firebase initialized successfully');
+            
+            // Test database connection
+            const dbRef = ref(database);
+            get(dbRef).then((snapshot) => {
+                console.log('Database connection successful');
+            }).catch((error) => {
+                console.error('Database connection error:', error);
+            });
+
+            // Make Firebase instances available globally
+            window.database = database;
+            window.auth = auth;
+        } catch (error) {
+            console.error('Firebase initialization error:', error);
+        }
+    </script>
+
+    <script src="Script.js" type="module"></script>
+</body>
+</html>
