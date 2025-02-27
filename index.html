@@ -241,45 +241,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-        // Your firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyB6yV6J9QfjAPrAQTbGkRijY_nxC0yx2wI",
-            authDomain: "minecraft-quiz-110d7.firebaseapp.com",
-            databaseURL: "https://minecraft-quiz-110d7-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "minecraft-quiz-110d7",
-            storageBucket: "minecraft-quiz-110d7.firebasestorage.app",
-            messagingSenderId: "221668746154",
-            appId: "1:221668746154:web:71fd8a84168c51c0a481d3"
-        };
-
-        // Initialize Firebase
-        try {
-            const app = initializeApp(firebaseConfig);
-            const database = getDatabase(app);
-            const auth = getAuth(app);
-            console.log('Firebase initialized successfully');
-            
-            // Test database connection
-            const dbRef = ref(database);
-            get(dbRef).then((snapshot) => {
-                console.log('Database connection successful');
-            }).catch((error) => {
-                console.error('Database connection error:', error);
-            });
-
-            // Make Firebase instances available globally
-            window.database = database;
-            window.auth = auth;
-        } catch (error) {
-            console.error('Firebase initialization error:', error);
-        }
-    </script>
 
     <script src="script.js" type="module"></script>
 </body>
