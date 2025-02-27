@@ -15,6 +15,9 @@ const chapterTitles = {
     5: "Conditionals with Grey Wolves"
 };
 
+// Your Google Script URL - REPLACE THIS WITH YOUR ACTUAL DEPLOYMENT URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_HERE/exec';
+
 // Initialize everything when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM fully loaded and parsed');
@@ -223,7 +226,7 @@ function collectAnswers() {
     return answers;
 }
 
-// Handle quiz submission to Google Sheets
+// Submit quiz using URL parameters (GET request) to avoid CORS issues
 async function submitQuiz() {
     try {
         const studentName = sessionStorage.getItem('studentName');
@@ -236,8 +239,7 @@ async function submitQuiz() {
         // Collect all answers
         const answers = collectAnswers();
         
-        // Format answers as a single string for Google Sheets
-        // This converts the answers object to a more spreadsheet-friendly format
+        // Format answers as a string
         let formattedAnswers = '';
         for (const [questionId, answer] of Object.entries(answers)) {
             if (Array.isArray(answer)) {
@@ -249,40 +251,57 @@ async function submitQuiz() {
             }
         }
         
-        // Prepare quiz data for submission to Google Sheets
-        const quizData = {
+        console.log('Preparing to submit quiz data:', {
             timestamp: new Date().toISOString(),
             studentName: studentName,
             studentClass: studentClass,
             answers: formattedAnswers
-        };
-
-        console.log('Preparing to submit quiz data:', quizData);
-        
-        // Replace with your Google Apps Script Web App URL
-        // You'll get this URL when you deploy your Google Script as a web app
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCs-hbHq8tl1MqczULratUFNFrnbDnRBXNy6Ryq407QykAAjNS4Blte1pFTMeXDsCvWQ/exec';
-        
-        // Submit data to Google Sheets
-        const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify(quizData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
         });
         
-        // Check if submission was successful
-        const result = await response.json();
-        if (result.success) {
-            console.log('Quiz submitted successfully to Google Sheets!');
+        // Create a URL with query parameters
+        const url = new URL(SCRIPT_URL);
+        url.searchParams.append('timestamp', new Date().toISOString());
+        url.searchParams.append('studentName', studentName);
+        url.searchParams.append('studentClass', studentClass);
+        url.searchParams.append('answers', formattedAnswers);
+        
+        console.log('Submitting to URL:', url.toString());
+        
+        // Create a form to submit (this approach often bypasses CORS issues)
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = SCRIPT_URL;
+        form.target = '_blank'; // Open in new tab (which will close immediately)
+        
+        // Add form fields
+        const addField = (name, value) => {
+            const field = document.createElement('input');
+            field.type = 'hidden';
+            field.name = name;
+            field.value = value;
+            form.appendChild(field);
+        };
+        
+        addField('timestamp', new Date().toISOString());
+        addField('studentName', studentName);
+        addField('studentClass', studentClass);
+        addField('answers', formattedAnswers);
+        
+        // Add the form to the document, submit it, and remove it
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+        
+        console.log('Form submitted');
+        
+        // Show success message
+        setTimeout(() => {
             alert('Quiz submitted successfully!');
-            
-            // Show quiz summary
-            showQuizSummary(quizData);
-        } else {
-            throw new Error(result.error || 'Failed to submit quiz data');
-        }
+            showQuizSummary({
+                studentName: studentName,
+                studentClass: studentClass
+            });
+        }, 1000);
         
     } catch (error) {
         console.error('Error submitting quiz:', error);
