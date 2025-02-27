@@ -261,7 +261,7 @@ async function submitQuiz() {
         
         // Replace with your Google Apps Script Web App URL
         // You'll get this URL when you deploy your Google Script as a web app
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOnB0D4zy3NuMjmHzG9kDXRC0DC4v3QhhDGpWbzaaYXQbz0-CURqaIz97sJQHedpSyVQ/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCs-hbHq8tl1MqczULratUFNFrnbDnRBXNy6Ryq407QykAAjNS4Blte1pFTMeXDsCvWQ/exec';
         
         // Submit data to Google Sheets
         const response = await fetch(SCRIPT_URL, {
