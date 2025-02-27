@@ -16,7 +16,7 @@ const chapterTitles = {
 };
 
 // Your Google Script URL - REPLACE THIS WITH YOUR ACTUAL DEPLOYMENT URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID_HERE/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCs-hbHq8tl1MqczULratUFNFrnbDnRBXNy6Ryq407QykAAjNS4Blte1pFTMeXDsCvWQ/exec';
 
 // Initialize everything when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
