@@ -1,4 +1,4 @@
-// script.js - Complete Quiz Management System
+// script.js - Complete Quiz Management System with Google Sheets Integration
 
 // State Management Variables
 let currentQuestion = 1;        // Tracks current question number (1-25)
@@ -223,31 +223,132 @@ function collectAnswers() {
     return answers;
 }
 
-// Handle quiz submission
-function submitQuiz() {
+// Handle quiz submission to Google Sheets
+async function submitQuiz() {
     try {
         const studentName = sessionStorage.getItem('studentName');
         const studentClass = sessionStorage.getItem('studentClass');
         
-        // Prepare quiz data for submission
+        if (!studentName || !studentClass) {
+            throw new Error('Student information not found');
+        }
+        
+        // Collect all answers
+        const answers = collectAnswers();
+        
+        // Format answers as a single string for Google Sheets
+        // This converts the answers object to a more spreadsheet-friendly format
+        let formattedAnswers = '';
+        for (const [questionId, answer] of Object.entries(answers)) {
+            if (Array.isArray(answer)) {
+                // For checkbox questions (multiple answers)
+                formattedAnswers += `${questionId}: ${answer.join(', ')}; `;
+            } else {
+                // For radio button and text questions
+                formattedAnswers += `${questionId}: ${answer}; `;
+            }
+        }
+        
+        // Prepare quiz data for submission to Google Sheets
         const quizData = {
+            timestamp: new Date().toISOString(),
             studentName: studentName,
             studentClass: studentClass,
-            timestamp: new Date().toISOString(),
-            answers: collectAnswers()
+            answers: formattedAnswers
         };
 
-        // Convert to JSON for Firebase
-        const jsonData = JSON.stringify(quizData);
+        console.log('Preparing to submit quiz data:', quizData);
         
-        // Log submission data and show success message
-        console.log('Quiz data ready for submission:', jsonData);
-        alert('Quiz submitted successfully!');
+        // Replace with your Google Apps Script Web App URL
+        // You'll get this URL when you deploy your Google Script as a web app
+        const SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
         
-        // TODO: Implement actual Firebase submission here
+        // Submit data to Google Sheets
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify(quizData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        // Check if submission was successful
+        const result = await response.json();
+        if (result.success) {
+            console.log('Quiz submitted successfully to Google Sheets!');
+            alert('Quiz submitted successfully!');
+            
+            // Show quiz summary
+            showQuizSummary(quizData);
+        } else {
+            throw new Error(result.error || 'Failed to submit quiz data');
+        }
         
     } catch (error) {
         console.error('Error submitting quiz:', error);
         alert('There was an error submitting your quiz. Please try again.');
+    }
+}
+
+// Function to display a summary of the quiz
+function showQuizSummary(quizData) {
+    // Hide the quiz
+    document.getElementById('quiz-page').classList.add('hidden');
+    
+    // Create a summary element if it doesn't exist
+    let summaryElement = document.getElementById('quiz-summary');
+    if (!summaryElement) {
+        summaryElement = document.createElement('div');
+        summaryElement.id = 'quiz-summary';
+        summaryElement.className = 'quiz-container';
+        document.body.appendChild(summaryElement);
+    }
+    
+    // Build the summary content
+    summaryElement.innerHTML = `
+        <h1>Quiz Submitted!</h1>
+        <p>Thank you, ${quizData.studentName} from ${quizData.studentClass}!</p>
+        <p>Your answers have been recorded.</p>
+        <button id="restart-btn" class="btn">Take Another Quiz</button>
+    `;
+    
+    // Show the summary
+    summaryElement.classList.remove('hidden');
+    
+    // Set up the restart button
+    document.getElementById('restart-btn').addEventListener('click', function() {
+        // Reset session storage
+        sessionStorage.removeItem('studentName');
+        sessionStorage.removeItem('studentClass');
+        
+        // Hide summary
+        summaryElement.classList.add('hidden');
+        
+        // Show landing page
+        document.getElementById('landing-page').classList.remove('hidden');
+        
+        // Reset form fields
+        document.getElementById('student-name').value = '';
+        document.getElementById('class-selection').selectedIndex = 0;
+        
+        // Reset all question inputs
+        resetQuizInputs();
+    });
+}
+
+// Function to reset all quiz inputs
+function resetQuizInputs() {
+    for (let i = 1; i <= totalQuestions; i++) {
+        // Reset radio buttons
+        const radioButtons = document.querySelectorAll(`input[name="q${i}"][type="radio"]`);
+        radioButtons.forEach(radio => radio.checked = false);
+        
+        // Reset checkboxes
+        const checkboxes = document.querySelectorAll(`input[name="q${i}"][type="checkbox"]`);
+        checkboxes.forEach(checkbox => checkbox.checked = false);
+        
+        // Reset text inputs
+        const textInputs = document.querySelectorAll(`input[name="q${i}"][type="text"], input[name="q${i}"][type="number"]`);
+        textInputs.forEach(input => input.value = '');
     }
 }
