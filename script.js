@@ -16,7 +16,7 @@ const chapterTitles = {
 };
 
 // Your Google Script URL - REPLACE THIS WITH YOUR ACTUAL DEPLOYMENT URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCs-hbHq8tl1MqczULratUFNFrnbDnRBXNy6Ryq407QykAAjNS4Blte1pFTMeXDsCvWQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXUhg8RzWHyOJYzjsWb8nJ89vaAt8Ry0M5arANkfFHp_7BsSDH4tax4MXXFebsMQfE-g/exec';
 
 // Initialize everything when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -226,7 +226,7 @@ function collectAnswers() {
     return answers;
 }
 
-// Submit quiz using URL parameters (GET request) to avoid CORS issues
+// Submit quiz using form submission to avoid CORS issues
 async function submitQuiz() {
     try {
         const studentName = sessionStorage.getItem('studentName');
@@ -251,27 +251,13 @@ async function submitQuiz() {
             }
         }
         
-        console.log('Preparing to submit quiz data:', {
-            timestamp: new Date().toISOString(),
-            studentName: studentName,
-            studentClass: studentClass,
-            answers: formattedAnswers
-        });
+        console.log('Preparing to submit quiz data');
         
-        // Create a URL with query parameters
-        const url = new URL(SCRIPT_URL);
-        url.searchParams.append('timestamp', new Date().toISOString());
-        url.searchParams.append('studentName', studentName);
-        url.searchParams.append('studentClass', studentClass);
-        url.searchParams.append('answers', formattedAnswers);
-        
-        console.log('Submitting to URL:', url.toString());
-        
-        // Create a form to submit (this approach often bypasses CORS issues)
+        // Create a form to submit (this approach bypasses CORS issues)
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = SCRIPT_URL;
-        form.target = '_blank'; // Open in new tab (which will close immediately)
+        form.action = SCRIPT_URL; // Uses the URL defined at the top of the file
+        form.target = '_blank'; // Open in new tab
         
         // Add form fields
         const addField = (name, value) => {
@@ -294,9 +280,8 @@ async function submitQuiz() {
         
         console.log('Form submitted');
         
-        // Show success message
+        // Show quiz summary after a short delay
         setTimeout(() => {
-            alert('Quiz submitted successfully!');
             showQuizSummary({
                 studentName: studentName,
                 studentClass: studentClass
