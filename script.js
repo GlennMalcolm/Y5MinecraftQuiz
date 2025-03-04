@@ -16,7 +16,7 @@ const chapterTitles = {
 };
 
 // Your Google Script URL - REPLACE THIS WITH YOUR ACTUAL DEPLOYMENT URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfPg5ktpz8Gh8AYTy2L7Qke32FINuqVr1IPoeYyVZzcv4L-6Rk5ik8Zm3t1A_UZhVolA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbywErHEUJPgailR9yvXUICv5x_WpN72FFI_gCuk5ZqjHBaUK6Cf1oiUwNqvXBwejZC9Sw/exec';
 
 // Initialize everything when the document is fully loaded
 document.addEventListener('DOMContentLoaded', function() {
